@@ -109,11 +109,10 @@ app.post("/upload", upload.single("file"), async (req, res) => {
 app.post("/login", (req, res) => {
   const { email, password } = req.body;
 
-<<<<<<< HEAD
+
   if (email === "nahakshaktiprasad@gmail.com" && password === "spn@1098") {
-=======
-  if (email === "nahakshaktiprasad@gmail.com" && password === "cutm@123") {
->>>>>>> b1336a464305cb16e8f8bd447fa1772264f243b8
+
+
     res.status(200).json({ success: true, message: "Login successful" });
   } else {
     res.status(401).json({ success: false, message: "Invalid credentials" });
