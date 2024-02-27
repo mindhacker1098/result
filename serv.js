@@ -67,8 +67,9 @@ app.post("/result", async (req, res) => {
   let resp = {};
   const data = await User.find({ "Registration No": req.body.reg });
 
-  if (!data) {
-    res.send("Regiseration Number Not Exists");
+  if (!data.length) {
+    res.status(404).send("Regiseration Number Not Exists");
+    return;
   }
   resp["data"] = data;
   resp["Name"] = data[0].Name;
@@ -108,12 +109,25 @@ app.post("/upload", upload.single("file"), async (req, res) => {
 app.post("/login", (req, res) => {
   const { email, password } = req.body;
 
-  if (email === "user@example.com" && password === "password") {
+  if (email === "nahakshaktiprasad@gmail.com" && password === "spn@1098") {
     res.status(200).json({ success: true, message: "Login successful" });
   } else {
     res.status(401).json({ success: false, message: "Invalid credentials" });
   }
 });
+app.get("/deleteall",async(req,res)=>{
+
+try{
+  await User.deleteMany({});
+res.send("all data deleted");
+}
+catch(e){
+
+res.send(e);
+
+}
+
+})
 var port = process.env.PORT || 8000;
 app.listen(port, () => {
   console.log("server started");
